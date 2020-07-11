@@ -25,11 +25,25 @@ class ArticlesController extends Controller {
 		return view ('articles.create'); 
 	}
 
-	public function store(Requests\CreateArticleRequest $request)
+	public function store(Requests\ArticleRequest $request)
 	{
 		Article::create($request->all());
 		
 		return redirect('articles'); 
 	}
+
+	public function edit($id)
+	{
+		$article = Article::findOrFail($id);
+		return view ('articles.edit')->with('article', $article); 
+	}	
+
+	
+	public function update($id, Requests\ArticleRequest $request)
+	{
+		$article = Article::findOrFail($id);
+		$article->update($request->all());
+		return redirect('articles'); 
+	}	
 
 }
