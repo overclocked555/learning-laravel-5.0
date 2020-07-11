@@ -4,9 +4,6 @@ use App\Article;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-//use Illuminate\Http\Request;
-use Request;
-
 class ArticlesController extends Controller {
 
 	//
@@ -28,11 +25,9 @@ class ArticlesController extends Controller {
 		return view ('articles.create'); 
 	}
 
-	public function store()
+	public function store(Requests\CreateArticleRequest $request)
 	{
-		$input = Request::all();
-
-		Article::create($input);
+		Article::create($request->all());
 		
 		return redirect('articles'); 
 	}
