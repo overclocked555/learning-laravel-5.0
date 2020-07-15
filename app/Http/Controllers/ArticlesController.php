@@ -3,6 +3,7 @@
 use App\Article;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\AuthController;
 
 class ArticlesController extends Controller {
 
@@ -27,8 +28,8 @@ class ArticlesController extends Controller {
 
 	public function store(Requests\ArticleRequest $request)
 	{
-		Article::create($request->all());
-		
+		$article = new Article($request->all());
+		Auth::user()->articles()->save($article);
 		return redirect('articles'); 
 	}
 
